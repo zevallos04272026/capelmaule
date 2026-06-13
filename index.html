@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Validación de Certificados - Innovacap</title>
     
+    <!-- Tipografía Geométrica Inspirada de Alta Fidelidad en Gotham -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@200;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
+    <!-- Iconografía Profesional -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -23,6 +25,9 @@
             --gris-texto: #1A202C;
             --gris-suave: #F7FAFC;
             --verde-exito: #2F855A;
+            
+            /* Pila tipográfica basada en image_fdd2f9.png */
+            --fuente-gotham: 'Gotham', 'Gotham SSm', 'Montserrat', sans-serif;
         }
 
         * {
@@ -34,12 +39,13 @@
         body {
             background-color: #E2E8F0;
             color: var(--gris-texto);
-            font-family: 'Montserrat', sans-serif;
+            font-family: var(--fuente-gotham);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            letter-spacing: -0.2px; 
         }
 
         /* ==========================================================================
@@ -61,7 +67,7 @@
             justify-content: space-between;
         }
 
-        /* Marca de agua central */
+        /* Marca de agua central general (Escudo) */
         .watermark-escudo {
             position: absolute;
             top: 45%;
@@ -96,7 +102,6 @@
             align-items: center;
         }
 
-        /* Ajuste y escalado del logo original */
         .logo-img {
             height: 75px; 
             width: auto;
@@ -111,7 +116,7 @@
             padding: 6px 15px;
             border-radius: 20px;
             font-size: 0.75rem;
-            font-weight: 900;
+            font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
             display: flex;
@@ -128,32 +133,32 @@
         }
 
         .title-section .subtitle-delgado {
-            font-size: 1rem;
-            font-weight: 200; 
+            font-size: 0.95rem;
+            font-weight: 300; 
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             color: #718096;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .title-section h2 {
-            font-size: 2.3rem;
-            font-weight: 900; 
+            font-size: 2.4rem;
+            font-weight: 700; 
             color: var(--azul-innovacap);
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
             text-transform: uppercase;
         }
 
         .title-section .rut-number {
             font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 500;
             color: var(--rojo-acento);
-            margin-top: 5px;
-            letter-spacing: 1px;
+            margin-top: 8px;
+            letter-spacing: 1.5px;
         }
 
         /* ==========================================================================
-           5. SECCIÓN DE CERTIFICADOS
+           5. SECCIÓN DE CERTIFICADOS CON MARCAS DE AGUA TEMÁTICAS TRANSPARENTES
            ========================================================================== */
         .certifications-grid {
             display: grid;
@@ -163,23 +168,43 @@
         }
 
         .cert-box {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border: 1px solid #E2E8F0;
             border-top: 5px solid var(--verde-innovacap);
             border-radius: 6px;
             padding: 25px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            position: relative; /* Esencial para posicionar el fondo transparente */
+            overflow: hidden;
+        }
+
+        /* Capa de imagen/icono de fondo transparente para las tarjetas */
+        .cert-box-watermark {
+            position: absolute;
+            bottom: -20px;
+            right: -10px;
+            font-size: 9rem;
+            color: var(--azul-innovacap);
+            opacity: 0.025; /* Transparencia ultra limpia y sutil */
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .cert-box-content {
+            position: relative;
+            z-index: 1; /* Mantiene el texto siempre al frente */
         }
 
         .cert-box h3 {
             font-size: 1.15rem;
-            font-weight: 900;
+            font-weight: 700;
             color: var(--azul-innovacap);
             margin-bottom: 12px;
             text-transform: uppercase;
             display: flex;
             align-items: center;
             gap: 10px;
+            letter-spacing: 0.2px;
         }
 
         .cert-box h3 i {
@@ -188,13 +213,311 @@
 
         .cert-box p {
             font-size: 0.9rem;
-            line-height: 1.5;
+            line-height: 1.6;
             color: #4A5568;
             margin-bottom: 15px;
+            font-weight: 400;
         }
 
         .cert-validity {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background-color:
+            background-color: var(--gris-suave);
+            border: 1px solid #E2E8F0;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--rojo-acento);
+            letter-spacing: 0.5px;
+        }
+
+        /* ==========================================================================
+           6. PIE CON SELLOS DE AGUA DE SEGURIDAD
+           ========================================================================== */
+        .validation-footer {
+            border-top: 1px solid #E2E8F0;
+            padding-top: 25px;
+            display: grid;
+            grid-template-columns: 1.2fr 1.5fr 1fr;
+            align-items: center;
+            gap: 20px;
+            position: relative; 
+        }
+
+        .footer-watermarks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            opacity: 0.04; 
+        }
+
+        .footer-watermarks i {
+            font-size: 9rem;
+            color: var(--azul-innovacap);
+        }
+
+        .footer-content-node {
+            position: relative;
+            z-index: 1; 
+        }
+
+        .seal-column {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .official-seal {
+            border: 2px dashed rgba(30, 64, 175, 0.8);
+            border-radius: 50%;
+            width: 130px;
+            height: 130px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transform: rotate(-4deg);
+            background-color: rgba(30, 64, 175, 0.02);
+        }
+
+        .seal-text-top {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--azul-innovacap);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .seal-star {
+            color: var(--verde-innovacap);
+            font-size: 1.1rem;
+            margin: 2px 0;
+        }
+
+        .seal-text-bottom {
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: var(--rojo-acento);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .signature-column {
+            text-align: center;
+            position: relative;
+        }
+
+        .handwritten-signature {
+            font-family: 'Alex Brush', cursive;
+            font-size: 2.8rem;
+            color: #1A202C;
+            position: absolute;
+            top: -45px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            transform: rotate(-3deg);
+            pointer-events: none;
+        }
+
+        .sig-line {
+            width: 80%;
+            height: 1px;
+            background-color: #A0AEC0;
+            margin: 45px auto 8px;
+        }
+
+        .sig-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--azul-innovacap);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sig-sub {
+            font-size: 0.7rem;
+            color: #718096;
+            font-weight: 400;
+        }
+
+        .meta-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            gap: 8px;
+        }
+
+        .meta-text {
+            font-size: 0.7rem;
+            color: #718096;
+            line-height: 1.4;
+        }
+
+        .meta-text strong {
+            color: var(--azul-innovacap);
+            font-weight: 700;
+        }
+
+        .institution-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--azul-innovacap);
+            text-transform: uppercase;
+            border-right: 3px solid var(--verde-innovacap);
+            padding-right: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* Responsivo */
+        @media (max-width: 850px) {
+            .sheet-container {
+                padding: 30px;
+                border: 8px double var(--azul-innovacap);
+            }
+            .watermark-escudo, .footer-watermarks, .cert-box-watermark {
+                display: none; 
+            }
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+            .validation-footer {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+            .seal-column, .meta-column {
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+            .institution-tag {
+                border-right: none;
+                border-bottom: 3px solid var(--verde-innovacap);
+                padding-right: 0;
+                padding-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor Principal (Hoja Única Estilo Certificado de Seguridad) -->
+    <div class="sheet-container">
+        
+        <!-- MARCA DE AGUA CENTRAL: Escudo Oficial (Transparente) -->
+        <img class="watermark-escudo" src="http://googleusercontent.com/image_collection/image_retrieval/12047427395544671210_0" alt="Escudo de Chile Marca de Agua">
+
+        <div class="sheet-content">
+            <!-- 1. Cabecera Institucional con Logo Real (image_fde93f.png) -->
+            <header>
+                <div class="logo-innovacap-container">
+                    <img class="logo-img" src="image_fde93f.png" alt="Logo Innovacap">
+                </div>
+                <div class="verification-badge">
+                    <i class="fa-solid fa-shield-halved"></i> Registro Oficial Validado
+                </div>
+            </header>
+
+            <!-- 2. Título Central del Egresado -->
+            <section class="title-section">
+                <div class="subtitle-delgado">Verificación y Autenticidad del Postulante</div>
+                <h2>Marisol Patiño Ramos</h2>
+                <div class="rut-number">Cédula de Identidad Nacional N° 28.769.984-0</div>
+            </section>
+
+            <!-- 3. Tarjetas de Certificados con Fondos Temáticos Transparentes -->
+            <section class="certifications-grid">
+                
+                <!-- Certificado 1: Manipulación de Alimentos -->
+                <div class="cert-box">
+                    <!-- Fondo Transparente de Alimentos -->
+                    <div class="cert-box-watermark">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div class="cert-box-content">
+                        <h3><i class="fa-solid fa-utensils"></i> Manipulador de Alimentos</h3>
+                        <p>Habilitada bajo las normas técnicas correspondientes de higiene y seguridad agroalimentaria, garantizando las buenas prácticas profesionales para asegurar la inocuidad de los alimentos y cuidar la salud colectiva.</p>
+                        <div class="cert-validity">
+                            <i class="fa-regular fa-calendar-check"></i> Válido hasta: 31 de mayo de 2030
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificado 2: Auxiliar de Aseo -->
+                <div class="cert-box">
+                    <!-- Fondo Transparente de Aseo -->
+                    <div class="cert-box-watermark">
+                        <i class="fa-solid fa-soap"></i>
+                    </div>
+                    <div class="cert-box-content">
+                        <h3><i class="fa-solid fa-broom"></i> Auxiliar de Aseo</h3>
+                        <p>Capacitada conforme a estándares avanzados en procedimientos de desinfección, higienización industrial y manejo seguro de insumos de protección química y personal en entornos de alta demanda operativa.</p>
+                        <div class="cert-validity">
+                            <i class="fa-regular fa-calendar-check"></i> Válido hasta: 31 de mayo de 2030
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <!-- 4. Pie de Seguridad Oficial con Sellos de Agua al Final -->
+        <div class="validation-footer">
+            
+            <!-- Capa de sellos de agua decorativos e institucionales de fondo -->
+            <div class="footer-watermarks">
+                <i class="fa-solid fa-award"></i>
+                <i class="fa-solid fa-signature"></i>
+            </div>
+            
+            <!-- Contenidos sobrepuestos -->
+            <!-- Sello Oficial -->
+            <div class="seal-column footer-content-node">
+                <div class="official-seal">
+                    <span class="seal-text-top">Capacitado y Certificado</span>
+                    <span class="seal-star">★</span>
+                    <span class="seal-text-bottom">Innovacap • Santiago</span>
+                </div>
+            </div>
+
+            <!-- Firma Académica -->
+            <div class="signature-column footer-content-node">
+                <div class="handwritten-signature">M. Benavides R.</div>
+                <div class="sig-line"></div>
+                <span class="sig-title">Dirección Académica</span><br>
+                <span class="sig-sub">Centro de Capacitación Innovacap</span>
+            </div>
+
+            <!-- Metadatos de Autenticación -->
+            <div class="meta-column footer-content-node">
+                <div class="institution-tag">Santiago de Chile</div>
+                <div class="meta-text">
+                    ID Registro: <strong>REG-28769984-0</strong><br>
+                    Sello Digital: <strong>INNOVACAP_SECURE_2026</strong><br>
+                    Sede Central Metropolitana
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
