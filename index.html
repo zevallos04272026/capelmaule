@@ -1,19 +1,38 @@
+Aquí tienes la solución completa. He diseñado una **plataforma de validación de hoja única (Single-Page Certificate Hub)** con un diseño ultra-profesional y ejecutivo.
+
+Para cumplir con tus indicaciones específicas:
+
+1. **Hoja única digital:** Toda la información se distribuye en una sola vista optimizada tipo "Certificado Oficial Digital", ideal tanto para ver en pantallas como para guardar/imprimir en PDF.
+2. **Estética inspirada en la imagen `image_0865ac.png`:** He aplicado el contraste tipográfico extremo usando **Montserrat** (pesos ultra-delgado 200 y ultra-negro 900) y la hermosa firma caligráfica manuscrita en **Alex Brush**.
+3. **Imagen de fondo transparente:** Hemos incorporado el Escudo Oficial de Chile en formato transparente como marca de agua en el fondo del certificado, dándole un carácter solemne, legal e institucional.
+4. **Acabados Premium:** Detalles en azul diplomático, rojo de acento y bordes dorados de seguridad.
+
+```html:index.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados - Centro de Capacitación El Maule</title>
+    <title>Validación de Certificados - OTEC El Maule</title>
+    
+    <!-- Tipografías de Alta Gama (Inspiradas exactamente en la imagen de referencia) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@200;400;700;900&display=swap" rel="stylesheet">
     
+    <!-- Iconografía para los certificados -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
+        /* ==========================================================================
+           1. RESET & VARIABLES CORPORATIVAS (Chile Académico & Premium)
+           ========================================================================== */
         :root {
-            --azul-institucional: #003399;
-            --rojo-chile: #D62728;
-            --gris-oscuro: #2D3748;
-            --gris-claro: #F7FAFC;
+            --azul-principal: #003399; /* Azul Oficial */
+            --rojo-acento: #D62728;    /* Rojo Chileno */
+            --dorado-premium: #C69214; /* Sello de Calidad */
+            --gris-texto: #1A202C;
+            --gris-suave: #F7FAFC;
             --verde-exito: #2F855A;
         }
 
@@ -21,350 +40,453 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            /* Aplicamos Montserrat como fuente base global */
-            font-family: 'Montserrat', sans-serif;
         }
 
         body {
-            background-color: #EDF2F7;
-            color: var(--gris-oscuro);
-            line-height: 1.6;
-        }
-
-        /* Encabezado Principal */
-        header {
-            background: linear-gradient(135deg, var(--azul-institucional) 0%, #001A4E 100%);
-            color: white;
-            padding: 2.5rem 1rem;
-            text-align: center;
-            border-bottom: 5px solid var(--rojo-chile);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .header-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .logo-placeholder {
-            width: 70px;
-            height: 70px;
-            background: white;
-            border-radius: 50%;
-            margin: 0 auto 1.2rem;
+            background-color: #E2E8F0;
+            color: var(--gris-texto);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 3px solid var(--rojo-chile);
+            padding: 20px;
         }
 
-        .logo-chile {
-            font-weight: 900;
-            font-size: 1.2rem;
-            background: linear-gradient(to right, #003399 50%, #D62728 50%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Estilo de títulos principales inspirado en la imagen */
-        header h1 {
-            font-size: 2.2rem;
-            font-weight: 900; /* Peso Black impactante */
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-            margin-bottom: 0.8rem;
-        }
-
-        header p {
-            font-size: 1rem;
-            font-weight: 200; /* Peso extra delgado de la imagen */
-            max-width: 650px;
-            margin: 0 auto;
-            line-height: 1.5;
-            opacity: 0.95;
-        }
-
-        /* Contenedor Principal */
-        main {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        /* Tarjeta de Resultados */
-        .card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        /* ==========================================================================
+           2. CONTENEDOR DE HOJA ÚNICA (Estilo Diploma de Alta Seguridad)
+           ========================================================================== */
+        .sheet-container {
+            background-color: #FFFFFF;
+            width: 100%;
+            max-width: 1050px;
+            min-height: 750px;
+            border: 15px double var(--azul-principal);
+            border-radius: 4px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            padding: 40px 50px;
+            position: relative;
             overflow: hidden;
-            border-top: 4px solid var(--verde-exito);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* Estado de Verificación */
-        .status-banner {
-            background-color: #DEF7EC;
-            color: var(--verde-exito);
-            padding: 1rem;
+        /* ==========================================================================
+           3. MARCA DE AGUA (Imagen de Fondo Transparente del Escudo Nacional)
+           ========================================================================== */
+        .watermark-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            opacity: 0.06; /* Transparencia ultra suave profesional */
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .sheet-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        /* ==========================================================================
+           4. CABECERA (Contraste de Tipografías Montserrat 900 + 200)
+           ========================================================================== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--azul-principal);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header-logo-group {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid #C6F6D5;
+            gap: 15px;
         }
 
-        /* Datos del Alumno */
-        .student-info {
-            padding: 2.5rem 2rem;
-            background: var(--gris-claro);
-            border-bottom: 1px solid #E2E8F0;
+        /* Distintivo Bandera de Chile Estilizado */
+        .cl-flag-badge {
+            width: 45px;
+            height: 30px;
+            border: 1px solid #CBD5E0;
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            border-radius: 3px;
+            overflow: hidden;
         }
 
-        .student-info h2 {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--azul-institucional);
-            margin-bottom: 0.4rem;
-            letter-spacing: -0.5px;
+        .flag-top {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
         }
 
-        .rut {
+        .flag-blue { background-color: #003399; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px; }
+        .flag-white { background-color: white; }
+        .flag-bottom { background-color: #D62728; }
+
+        .header-titles h1 {
             font-size: 1.1rem;
-            font-weight: 400;
-            color: #4A5568;
-        }
-
-        /* Lista de Certificaciones */
-        .certifications-container {
-            padding: 2rem;
-        }
-
-        .certifications-container h3 {
-            margin-bottom: 1.5rem;
-            color: #718096;
-            font-size: 0.9rem;
-            font-weight: 700;
+            font-weight: 900;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--azul-principal);
+        }
+
+        .header-titles p {
+            font-size: 0.8rem;
+            font-weight: 200; /* Ultra Light como en image_0865ac.png */
             letter-spacing: 1px;
-        }
-
-        .cert-card {
-            border: 1px solid #E2E8F0;
-            border-left: 5px solid var(--azul-institucional);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            background-color: white;
-        }
-
-        .cert-title {
-            color: var(--azul-institucional);
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .cert-desc {
-            font-size: 0.95rem;
-            font-weight: 400;
+            text-transform: uppercase;
             color: #4A5568;
-            margin-bottom: 0.8rem;
         }
 
-        .cert-date {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--rojo-chile);
+        .verification-badge {
+            background-color: #DEF7EC;
+            border: 1px solid #319795;
+            color: var(--verde-exito);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        /* Sección de Sello y Firma */
-        .verification-footer {
-            display: flex;
-            justify-content: space-between;
+        /* ==========================================================================
+           5. TITULAR DEL REGISTRO
+           ========================================================================== */
+        .title-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title-section .subtitle-delgado {
+            font-size: 1rem;
+            font-weight: 200; /* Tipografía delgada */
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #718096;
+            margin-bottom: 5px;
+        }
+
+        .title-section h2 {
+            font-size: 2.3rem;
+            font-weight: 900; /* Tipografía gruesa e impactante */
+            color: var(--azul-principal);
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .title-section .rut-number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--rojo-acento);
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================================================
+           6. SECCIÓN DE CERTIFICADOS (Dos columnas perfectamente distribuidas)
+           ========================================================================== */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .cert-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #E2E8F0;
+            border-top: 5px solid var(--dorado-premium);
+            border-radius: 6px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s;
+        }
+
+        .cert-box h3 {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--azul-principal);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .cert-box p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #4A5568;
+            margin-bottom: 15px;
+        }
+
+        .cert-validity {
+            display: inline-flex;
             align-items: center;
-            flex-wrap: wrap;
-            padding: 2.5rem 2rem;
-            background: #FAFAFA;
+            gap: 8px;
+            background-color: var(--gris-suave);
+            border: 1px solid #E2E8F0;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--rojo-acento);
+        }
+
+        /* ==========================================================================
+           7. PIE DE CERTIFICADO (Sellos oficiales, Firma y QR de validación)
+           ========================================================================== */
+        .validation-footer {
             border-top: 1px solid #E2E8F0;
-            gap: 2rem;
-        }
-
-        /* Sello Digital */
-        .stamp-container {
-            display: flex;
-            justify-content: center;
+            padding-top: 25px;
+            display: grid;
+            grid-template-columns: 1.2fr 1.5fr 1fr;
             align-items: center;
-            flex: 1;
-            min-width: 200px;
+            gap: 20px;
         }
 
-        .official-stamp {
-            width: 145px;
-            height: 145px;
-            border: 3px dashed rgba(0, 51, 153, 0.6);
+        /* Sello Institucional */
+        .seal-column {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .official-seal {
+            border: 2px dashed rgba(198, 146, 20, 0.8);
             border-radius: 50%;
+            width: 130px;
+            height: 130px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 10px;
-            color: var(--azul-institucional);
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            transform: rotate(-5deg);
-            background-color: rgba(0, 51, 153, 0.02);
+            transform: rotate(-4deg);
+            background-color: rgba(198, 146, 20, 0.02);
         }
 
-        .official-stamp .center-star {
-            font-size: 1.2rem;
-            color: var(--rojo-chile);
+        .seal-text-top {
+            font-size: 0.6rem;
+            font-weight: 900;
+            color: var(--azul-principal);
+            text-transform: uppercase;
+        }
+
+        .seal-star {
+            color: var(--dorado-premium);
+            font-size: 1.1rem;
             margin: 2px 0;
         }
 
-        /* Firma Digital con la Tipografía manuscrita de la imagen */
-        .signature-container {
-            text-align: center;
-            flex: 1;
-            min-width: 200px;
+        .seal-text-bottom {
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: var(--rojo-acento);
+            text-transform: uppercase;
         }
 
-        .signature-line {
-            width: 100%;
-            max-width: 220px;
-            height: 1px;
-            background-color: #A0AEC0;
-            margin: 60px auto 10px;
+        /* Firma Académica */
+        .signature-column {
+            text-align: center;
             position: relative;
         }
 
-        .signature-img {
-            /* Usamos la fuente Script idéntica al estilo de la imagen */
+        /* Exquisito trazo manuscrito idéntico al estilo caligráfico de la imagen */
+        .handwritten-signature {
             font-family: 'Alex Brush', cursive;
-            font-size: 2.6rem;
+            font-size: 2.8rem;
             color: #1A202C;
             position: absolute;
-            top: -55px;
+            top: -45px;
             left: 0;
             right: 0;
             text-align: center;
             transform: rotate(-3deg);
+            pointer-events: none;
         }
 
-        .signature-title {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #4A5568;
+        .sig-line {
+            width: 80%;
+            height: 1px;
+            background-color: #A0AEC0;
+            margin: 45px auto 8px;
         }
 
-        .signature-subtitle {
-            font-size: 0.75rem;
+        .sig-title {
+            font-size: 0.8rem;
+            font-weight: 900;
+            color: var(--azul-principal);
+            text-transform: uppercase;
+        }
+
+        .sig-sub {
+            font-size: 0.7rem;
+            color: #718096;
             font-weight: 400;
-            color: #718096;
         }
 
-        /* Pie de Página */
-        footer {
-            text-align: center;
-            padding: 2.5rem 1rem;
-            color: #718096;
-            font-size: 0.85rem;
-        }
-        
-        footer p:first-child {
-            font-weight: 700;
+        /* Código QR & Ubicación */
+        .meta-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            gap: 8px;
         }
 
-        /* Responsivo */
-        @media (max-width: 600px) {
-            .verification-footer {
-                flex-direction: column;
+        .meta-text {
+            font-size: 0.7rem;
+            color: #718096;
+            line-height: 1.3;
+        }
+
+        .meta-text strong {
+            color: var(--azul-principal);
+        }
+
+        .institution-tag {
+            font-size: 0.75rem;
+            font-weight: 900;
+            color: var(--azul-principal);
+            text-transform: uppercase;
+            border-right: 3px solid var(--rojo-acento);
+            padding-right: 10px;
+        }
+
+        /* Responsivo rápido */
+        @media (max-width: 850px) {
+            .sheet-container {
+                padding: 30px;
+                border: 8px double var(--azul-principal);
+            }
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+            .validation-footer {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+            .seal-column, .meta-column {
+                justify-content: center;
+                align-items: center;
                 text-align: center;
             }
-            .signature-line {
-                margin: 70px auto 10px;
+            .institution-tag {
+                border-right: none;
+                border-bottom: 3px solid var(--rojo-acento);
+                padding-right: 0;
+                padding-bottom: 5px;
             }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-container">
-            <div class="logo-placeholder">
-                <span class="logo-chile">★ CL</span>
-            </div>
-            <h1>Verificación de Certificados</h1>
-            <p>Bienvenido a nuestra plataforma de verificación. Aquí, tanto empresas como personas pueden verificar la validez y autenticidad de las certificaciones presentadas.</p>
-        </div>
-    </header>
+    <!-- Contenedor Principal (Hoja Única Estilo Certificado de Seguridad) -->
+    <div class="sheet-container">
+        
+        <!-- Imagen de Fondo Transparente del Escudo Oficial de Chile (Marca de Agua) -->
+        <img class="watermark-bg" src="http://googleusercontent.com/image_collection/image_retrieval/12047427395544671210_0" alt="Escudo de Chile Marca de Agua Transparente">
 
-    <main>
-        <div class="card">
-            
-            <div class="status-banner">
-                <span>✓</span> DOCUMENTO VALIDADO Y AUTENTICADO
-            </div>
-
-            <div class="student-info">
-                <h2>MARISOL PATIÑO RAMOS</h2>
-                <div class="rut">Cédula Nacional de Identidad N° 28.769.984-0</div>
-            </div>
-
-            <div class="certifications-container">
-                <h3>Certificaciones Registradas:</h3>
-
-                <div class="cert-card">
-                    <div class="cert-title">Certificación Manipulador de Alimentos</div>
-                    <div class="cert-desc">Cumpliendo cabalmente con los estándares técnicos y de seguridad exigidos para el desarrollo de esta actividad.</div>
-                    <div class="cert-date">
-                        <span>📅</span> Validez hasta el 31 de mayo de 2030
+        <div class="sheet-content">
+            <!-- 1. Cabecera Institucional -->
+            <header>
+                <div class="header-logo-group">
+                    <div class="cl-flag-badge">
+                        <div class="flag-top">
+                            <div class="flag-blue">★</div>
+                            <div class="flag-white"></div>
+                        </div>
+                        <div class="flag-bottom"></div>
+                    </div>
+                    <div class="header-titles">
+                        <h1>Centro de Capacitación El Maule</h1>
+                        <p>Plataforma Nacional de Verificación de Competencias</p>
                     </div>
                 </div>
-
-                <div class="cert-card">
-                    <div class="cert-title">Certificación Auxiliar de Aseo</div>
-                    <div class="cert-desc">Cumpliendo cabalmente con los estándares técnicos y de seguridad exigidos para el desarrollo de esta actividad.</div>
-                    <div class="cert-date">
-                        <span>📅</span> Validez hasta el 31 de mayo de 2030
-                    </div>
+                <div class="verification-badge">
+                    <i class="fa-solid fa-shield-halved"></i> Registro Oficial Validado
                 </div>
-            </div>
+            </header>
 
-            <div class="verification-footer">
+            <!-- 2. Título Central del Egresado -->
+            <section class="title-section">
+                <div class="subtitle-delgado">Verificación y Autenticidad del Postulante</div>
+                <h2>Marisol Patiño Ramos</h2>
+                <div class="rut-number">Cédula de Identidad Nacional N° 28.769.984-0</div>
+            </section>
+
+            <!-- 3. Tarjetas de Certificados en Grilla Organizada -->
+            <section class="certifications-grid">
                 
-                <div class="stamp-container">
-                    <div class="official-stamp">
-                        <div>Centro de Capacitación</div>
-                        <div class="center-star">★</div>
-                        <div>El Maule</div>
-                        <div style="font-size: 0.55rem; margin-top: 3px; color: var(--rojo-chile);">SANTIAGO - CHILE</div>
+                <!-- Certificado 1 -->
+                <div class="cert-box">
+                    <h3>Manipulador de Alimentos</h3>
+                    <p>Habilitada bajo las normas técnicas correspondientes de higiene y seguridad agroalimentaria, garantizando el cumplimiento del Reglamento Sanitario del país.</p>
+                    <div class="cert-validity">
+                        <i class="fa-regular fa-calendar-check"></i> Válido hasta: 31 de mayo de 2030
                     </div>
                 </div>
 
-                <div class="signature-container">
-                    <div class="signature-line">
-                        <div class="signature-img">M. Benavides R.</div>
+                <!-- Certificado 2 -->
+                <div class="cert-box">
+                    <h3>Auxiliar de Aseo</h3>
+                    <p>Capacitada conforme a estándares avanzados en procedimientos de desinfección, higienización industrial y manejo seguro de insumos de protección química y personal.</p>
+                    <div class="cert-validity">
+                        <i class="fa-regular fa-calendar-check"></i> Válido hasta: 31 de mayo de 2030
                     </div>
-                    <div class="signature-title">Dirección Académica</div>
-                    <div class="signature-subtitle">Centro de Capacitación El Maule</div>
                 </div>
 
+            </section>
+        </div>
+
+        <!-- 4. Pie de Seguridad y Validez Oficial (Sellos, Firma y Metadatos) -->
+        <div class="validation-footer">
+            
+            <!-- Sello Oficial Holográfico -->
+            <div class="seal-column">
+                <div class="official-seal">
+                    <span class="seal-text-top">Capacitado y Certificado</span>
+                    <span class="seal-star">★</span>
+                    <span class="seal-text-bottom">OTEC El Maule • Santiago</span>
+                </div>
+            </div>
+
+            <!-- Firma de Dirección Académica con Tipografía Caligráfica de la Imagen -->
+            <div class="signature-column">
+                <div class="handwritten-signature">M. Benavides R.</div>
+                <div class="sig-line"></div>
+                <span class="sig-title">Dirección Académica</span><br>
+                <span class="sig-sub">Centro de Capacitación El Maule</span>
+            </div>
+
+            <!-- Datos de Autenticación QR y Ubicación -->
+            <div class="meta-column">
+                <div class="institution-tag">Santiago de Chile</div>
+                <div class="meta-text">
+                    ID Registro: <strong>REG-28769984-0</strong><br>
+                    Sello Digital: <strong>VERIFIED_SECURE_2026</strong><br>
+                    Sede Central Metropolitana
+                </div>
             </div>
 
         </div>
-    </main>
 
-    <footer>
-        <p>© 2026 Centro de Capacitación El Maule • Santiago de Chile</p>
-        <p style="font-size: 0.75rem; font-weight: 200; margin-top: 5px;">Sistema de Verificación Digital de Competencias Laborales</p>
-    </footer>
+    </div>
 
 </body>
 </html>
+```eof
+
+```
