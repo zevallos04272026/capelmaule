@@ -3,31 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validación de Certificados - Innovacap</title>
+    <title>Sistema de Verificación de Competencias - Innovacap</title>
     
-    <!-- Tipografía Geométrica Inspirada de Alta Fidelidad en Gotham -->
+    <!-- Fuentes elegantes y profesionales -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     
-    <!-- Iconografía Profesional -->
+    <!-- Iconografía oficial -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* ==========================================================================
-           1. VARIABLES CORPORATIVAS (Alineadas con Innovacap)
-           ========================================================================== */
         :root {
-            --azul-innovacap: #1E40AF;  
-            --verde-innovacap: #22C55E; 
-            --rojo-acento: #D62728;    
-            --dorado-premium: #C69214; 
-            --gris-texto: #1A202C;
-            --gris-suave: #F7FAFC;
-            --verde-exito: #2F855A;
-            
-            /* Pila tipográfica basada en Gotham */
-            --fuente-gotham: 'Gotham', 'Gotham SSm', 'Montserrat', sans-serif;
+            --azul-institucional: #0F172A;
+            --azul-innovacap: #1E40AF;
+            --verde-exito: #10B981;
+            --verde-suave: #ECFDF5;
+            --dorado-premium: #D97706;
+            --dorado-suave: #FEF3C7;
+            --gris-fondo: #F1F5F9;
+            --gris-texto: #334155;
+            --blanco: #FFFFFF;
+            --rojo-vigencia: #DC2626;
         }
 
         * {
@@ -37,491 +34,547 @@
         }
 
         body {
-            background-color: #E2E8F0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--gris-fondo);
             color: var(--gris-texto);
-            font-family: var(--fuente-gotham);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            letter-spacing: -0.2px; 
         }
 
-        /* ==========================================================================
-           2. CONTENEDOR DE HOJA ÚNICA (Estilo Diploma de Alta Seguridad)
-           ========================================================================== */
-        .sheet-container {
-            background-color: #FFFFFF;
+        /* Contenedor del Buscador / Validador */
+        .search-wrapper {
+            background: var(--blanco);
             width: 100%;
-            max-width: 1050px;
-            min-height: 780px;
-            border: 15px double var(--azul-innovacap);
-            border-radius: 4px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            padding: 40px 50px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        /* Marca de agua central general (Escudo) */
-        .watermark-escudo {
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 45%;
-            opacity: 0.03; 
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .sheet-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-        }
-
-        /* ==========================================================================
-           3. ENCABEZADO CON EL LOGO REAL INTEGRADO
-           ========================================================================== */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #E2E8F0;
-            padding-bottom: 20px;
+            max-width: 550px;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+            text-align: center;
+            border-top: 5px solid var(--azul-innovacap);
             margin-bottom: 30px;
+            transition: all 0.3s ease;
         }
 
-        .logo-innovacap-container {
+        .logo-busqueda {
+            max-height: 70px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+
+        .search-wrapper h1 {
+            font-size: 1.4rem;
+            color: var(--azul-institucional);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .search-wrapper p {
+            font-size: 0.9rem;
+            color: #64748B;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94A3B8;
+            font-size: 1.1rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            font-size: 1rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-weight: 600;
+            color: var(--azul-institucional);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--azul-innovacap);
+        }
+
+        .btn-verificar {
+            width: 100%;
+            background-color: var(--azul-innovacap);
+            color: var(--blanco);
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
             display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background-color 0.2s;
         }
 
-        .logo-img {
-            height: 75px; 
-            width: auto;
-            object-fit: contain;
-            display: block;
+        .btn-verificar:hover {
+            background-color: #1D4ED8;
         }
 
-        .verification-badge {
-            background-color: #DEF7EC;
-            border: 1px solid #319795;
+        /* Contenedor del Resultado del Certificado */
+        .certificate-container {
+            display: none; 
+            background: var(--blanco);
+            width: 100%;
+            max-width: 850px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            padding: 50px;
+            position: relative;
+            border: 2px solid #E2E8F0;
+            background-image: radial-gradient(rgba(30, 64, 175, 0.02) 1px, transparent 0);
+            background-size: 24px 24px;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Marco de Doble Línea Elegante */
+        .certificate-border-inner {
+            border: 4px double #CBD5E1;
+            padding: 30px;
+            position: relative;
+        }
+
+        /* Sello de verificación flotante */
+        .badge-verificado {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: var(--verde-suave);
             color: var(--verde-exito);
-            padding: 6px 15px;
-            border-radius: 20px;
+            border: 1px solid var(--verde-exito);
+            padding: 6px 14px;
             font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 1px;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        /* ==========================================================================
-           4. TITULAR DEL REGISTRO
-           ========================================================================== */
-        .title-section {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .title-section .subtitle-delgado {
-            font-size: 0.95rem;
-            font-weight: 300; 
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #718096;
-            margin-bottom: 8px;
-        }
-
-        .title-section h2 {
-            font-size: 2.4rem;
-            font-weight: 700; 
-            color: var(--azul-innovacap);
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-        }
-
-        .title-section .rut-number {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--rojo-acento);
-            margin-top: 8px;
-            letter-spacing: 1.5px;
-        }
-
-        /* ==========================================================================
-           5. SECCIÓN DE CERTIFICADOS CON IMÁGENES DE FONDO REALES (MARCA DE AGUA)
-           ========================================================================== */
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
+        /* Encabezado del Certificado */
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #F1F5F9;
+            padding-bottom: 20px;
             margin-bottom: 35px;
         }
 
-        .cert-box {
-            background: rgba(255, 255, 255, 0.92);
-            border: 1px solid #E2E8F0;
-            border-top: 5px solid var(--verde-innovacap);
-            border-radius: 6px;
-            padding: 25px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
-            position: relative; 
-            overflow: hidden;
-        }
-
-        /* Contenedor genérico para las imágenes marca de agua del usuario */
-        .cert-box-image-watermark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            pointer-events: none;
-            z-index: 0;
-            /* Filtros avanzados para aspecto marca de agua oficial tenue */
-            filter: grayscale(100%) contrast(120%) brightness(105%);
-            opacity: 0.08; 
-        }
-
-        .cert-box-content {
-            position: relative;
-            z-index: 1; /* Mantiene los textos legibles sobre la marca de agua */
-        }
-
-        .cert-box h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--azul-innovacap);
-            margin-bottom: 12px;
-            text-transform: uppercase;
+        /* Contenedor horizontal para los dos logos de arriba */
+        .logo-group {
             display: flex;
             align-items: center;
-            gap: 10px;
-            letter-spacing: 0.2px;
+            gap: 15px;
         }
 
-        .cert-box h3 i {
-            color: var(--verde-innovacap);
+        .cert-logo {
+            max-height: 60px;
+            object-fit: contain;
         }
 
-        .cert-box p {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: #1A202C; /* Contraste un poco más alto para máxima legibilidad */
-            margin-bottom: 15px;
-            font-weight: 500;
+        .cert-logo-sence {
+            max-height: 52px; /* Tamaño adaptado para equilibrar con el logo de Innovacap */
+            object-fit: contain;
         }
 
-        .cert-validity {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 1px solid #CBD5E1;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--rojo-acento);
-            letter-spacing: 0.5px;
-        }
-
-        /* ==========================================================================
-           6. PIE CON SELLOS DE AGUA DE SEGURIDAD AL FINAL
-           ========================================================================== */
-        .validation-footer {
-            border-top: 1px solid #E2E8F0;
-            padding-top: 25px;
-            display: grid;
-            grid-template-columns: 1.2fr 1.5fr 1fr;
-            align-items: center;
-            gap: 20px;
-            position: relative; 
-        }
-
-        .footer-watermarks {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            opacity: 0.04; 
-        }
-
-        .footer-watermarks i {
-            font-size: 9rem;
-            color: var(--azul-innovacap);
-        }
-
-        .footer-content-node {
-            position: relative;
-            z-index: 1; 
-        }
-
-        .seal-column {
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        .official-seal {
-            border: 2px dashed rgba(30, 64, 175, 0.8);
-            border-radius: 50%;
-            width: 130px;
-            height: 130px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            transform: rotate(-4deg);
-            background-color: rgba(30, 64, 175, 0.02);
-        }
-
-        .seal-text-top {
-            font-size: 0.6rem;
-            font-weight: 700;
-            color: var(--azul-innovacap);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .seal-star {
-            color: var(--verde-innovacap);
-            font-size: 1.1rem;
-            margin: 2px 0;
-        }
-
-        .seal-text-bottom {
-            font-size: 0.55rem;
-            font-weight: 700;
-            color: var(--rojo-acento);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .signature-column {
-            text-align: center;
-            position: relative;
-        }
-
-        .handwritten-signature {
-            font-family: 'Alex Brush', cursive;
-            font-size: 2.8rem;
-            color: #1A202C;
-            position: absolute;
-            top: -45px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            transform: rotate(-3deg);
-            pointer-events: none;
-        }
-
-        .sig-line {
-            width: 80%;
-            height: 1px;
-            background-color: #A0AEC0;
-            margin: 45px auto 8px;
-        }
-
-        .sig-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--azul-innovacap);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .sig-sub {
-            font-size: 0.7rem;
-            color: #718096;
-            font-weight: 400;
-        }
-
-        .meta-column {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+        .cert-meta-header {
             text-align: right;
-            gap: 8px;
         }
 
-        .meta-text {
-            font-size: 0.7rem;
-            color: #718096;
+        .cert-meta-header p {
+            font-size: 0.75rem;
+            color: #64748B;
+            font-weight: 500;
             line-height: 1.4;
         }
 
-        .meta-text strong {
+        .cert-meta-header strong {
             color: var(--azul-innovacap);
+        }
+
+        /* Cuerpo del Certificado */
+        .cert-body {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cert-body h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--azul-institucional);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .cert-body .constancia-texto {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #475569;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-weight: 400;
+        }
+
+        .cert-body .constancia-texto strong {
+            color: var(--azul-institucional);
             font-weight: 700;
         }
 
-        .institution-tag {
+        /* Grilla Didáctica de Cargos Habilitados */
+        .cargos-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 760px;
+            margin: 0 auto 15px;
+        }
+
+        .cargo-card {
+            background: #F8FAFC;
+            border-left: 5px solid var(--azul-innovacap);
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .cargo-card.alimentos {
+            border-left-color: var(--dorado-premium);
+        }
+
+        .cargo-top-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .cargo-icon {
+            font-size: 1.5rem;
+            color: var(--azul-innovacap);
+            background: #EFF6FF;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .cargo-card.alimentos .cargo-icon {
+            color: var(--dorado-premium);
+            background: var(--dorado-suave);
+        }
+
+        .cargo-info h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--azul-institucional);
+            margin-bottom: 2px;
+        }
+
+        .cargo-info p {
+            font-size: 0.75rem;
+            color: var(--verde-exito);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .cargo-descripcion {
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: #475569;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .cargo-vigencia-roja {
+            font-size: 0.75rem;
+            color: var(--rojo-vigencia);
+            font-weight: 700;
+            margin-top: auto; 
+            padding-top: 10px;
+            border-top: 1px dashed #E2E8F0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Pie del Certificado con Sellos y Firmas */
+        .cert-footer {
+            border-top: 1px solid #E2E8F0;
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-sello {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.75rem;
+            color: #64748B;
+            font-weight: 500;
+        }
+
+        .footer-sello i {
+            font-size: 2.2rem;
+            color: var(--azul-innovacap);
+            opacity: 0.8;
+        }
+
+        /* Contenedor de firma */
+        .footer-firma {
+            text-align: center;
+            min-width: 280px;
+            height: 120px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+        }
+
+        .img-firma {
+            position: absolute;
+            bottom: 25px; 
+            max-height: 115px; 
+            width: auto;
+            object-fit: contain;
+            z-index: 3; 
+            mix-blend-mode: multiply; 
+            opacity: 0.95; 
+            pointer-events: none;
+        }
+
+        .linea-firma {
+            border-bottom: 1px solid #94A3B8;
+            margin-bottom: 8px;
+            width: 100%;
+            position: relative;
+            z-index: 2; 
+        }
+
+        .footer-firma p {
             font-size: 0.75rem;
             font-weight: 700;
-            color: var(--azul-innovacap);
-            text-transform: uppercase;
-            border-right: 3px solid var(--verde-innovacap);
-            padding-right: 10px;
-            letter-spacing: 1px;
+            color: var(--azul-institucional);
+            position: relative;
+            z-index: 4; 
+            background-color: rgba(255, 255, 255, 0.9); 
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .footer-firma span {
+            font-size: 0.65rem;
+            color: #64748B;
+            display: block;
+            position: relative;
+            z-index: 4;
+        }
+
+        /* Alertas de error en búsqueda */
+        .error-message {
+            display: none;
+            color: #DC2626;
+            background: #FEF2F2;
+            border: 1px solid #FCA5A5;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
 
         /* Responsivo */
-        @media (max-width: 850px) {
-            .sheet-container {
-                padding: 30px;
-                border: 8px double var(--azul-innovacap);
-            }
-            .watermark-escudo, .footer-watermarks {
-                display: none; 
-            }
-            header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-            .certifications-grid {
-                grid-template-columns: 1fr;
-            }
-            .validation-footer {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 40px;
-            }
-            .seal-column, .meta-column {
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-            }
-            .institution-tag {
-                border-right: none;
-                border-bottom: 3px solid var(--verde-innovacap);
-                padding-right: 0;
-                padding-bottom: 5px;
-            }
+        @media (max-width: 768px) {
+            .certificate-container { padding: 20px; }
+            .certificate-border-inner { padding: 15px; }
+            .cargos-container { grid-template-columns: 1fr; }
+            .cert-header { flex-direction: column; gap: 20px; text-align: center; }
+            .logo-group { justify-content: center; }
+            .cert-meta-header { text-align: center; }
+            .cert-footer { flex-direction: column; gap: 25px; text-align: center; }
+            .footer-sello { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Contenedor Principal (Hoja Única Estilo Certificado de Seguridad) -->
-    <div class="sheet-container">
+    <!-- BLOQUE 1: BUSCADOR SIMULADO -->
+    <div class="search-wrapper" id="buscador">
+        <img class="logo-busqueda" src="https://redcapacitacion.cl/datos/oferentes/logo-6498.png" alt="Logo Innovacap">
+        <h1>Consulta de Registros Oficiales</h1>
+        <p>Por motivos de seguridad, ingrese el RUN completo del titular para verificar su autenticidad.</p>
         
-        <!-- MARCA DE AGUA CENTRAL: Escudo Oficial (Transparente) -->
-        <img class="watermark-escudo" src="http://googleusercontent.com/image_collection/image_retrieval/12047427395544671210_0" alt="Escudo de Chile Marca de Agua">
+        <div class="error-message" id="errorBox">
+            <i class="fa-solid fa-circle-exclamation"></i> El RUT ingresado no registra certificados activos en nuestra base de datos.
+        </div>
 
-        <div class="sheet-content">
-            <!-- 1. Cabecera Institucional con Logo Real (image_fde93f.png) -->
-            <header>
-                <div class="logo-innovacap-container">
-                    <img class="logo-img" src="https://redcapacitacion.cl/datos/oferentes/logo-6498.png" alt="Logo Innovacap">
+        <div class="input-group">
+            <i class="fa-solid fa-id-card"></i>
+            <input type="text" id="rutInput" placeholder="Ej: 12345678-9 o 12.345.678-9">
+        </div>
+
+        <button class="btn-verificar" onclick="validarRut()">
+            <i class="fa-solid fa-shield-check"></i> Verificar Certificado
+        </button>
+    </div>
+
+
+    <!-- BLOQUE 2: VISTA DEL CERTIFICADO -->
+    <div class="certificate-container" id="certificado">
+        <div class="certificate-border-inner">
+            
+            <!-- Sello Oficial Verificado superior -->
+            <div class="badge-verificado">
+                <i class="fa-solid fa-circle-check"></i> Documento Auténtico
+            </div>
+
+            <!-- Encabezado corporativo con ambos logos al costado -->
+            <header class="cert-header">
+                <div class="logo-group">
+                    <img class="cert-logo" src="https://redcapacitacion.cl/datos/oferentes/logo-6498.png" alt="Logo Innovacap">
+                    <img class="cert-logo-sence" src="https://fundacioncadel.cl/wp-content/uploads/2022/03/Logo-SENCE-1170x568.png" alt="Logo SENCE">
                 </div>
-                <div class="verification-badge">
-                    <i class="fa-solid fa-shield-halved"></i> Registro Oficial Validado
+                <div class="cert-meta-header">
+                    <p>Código Verificador: <strong>INV-2026-9984</strong></p>
+                    <p>Registro Nacional SENCE: <strong>Activo</strong></p>
+                    <p>Institución: <strong>Innovacap Capacitaciones</strong></p>
                 </div>
             </header>
 
-            <!-- 2. Título Central del Egresado -->
-            <section class="title-section">
-                <div class="subtitle-delgado">Verificación y Autenticidad del Postulante</div>
-                <h2>Marisol Patiño Ramos</h2>
-                <div class="rut-number">Cédula de Identidad Nacional N° 28.769.984-0</div>
-            </section>
-
-            <!-- 3. Tarjetas de Certificados con Fondos Temáticos Reales del Usuario -->
-            <section class="certifications-grid">
+            <!-- Cuerpo Central -->
+            <div class="cert-body">
+                <h2>Constancia de Capacitación Oficial</h2>
                 
-                <!-- Certificado 1: Manipulación de Alimentos -->
-                <div class="cert-box">
-                    <!-- Imagen de fondo real (image_fd7484.png) -->
-                    <img class="cert-box-image-watermark" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlSNhJhJtD74lXFKM-MBf0aXgEK5CkBQ3AKw&s" alt="Fondo Manipulación de Alimentos">
+                <p class="constancia-texto">
+                    El Sr./Sra. <strong>MARISOL PATIÑO RAMOS</strong>, cédula nacional de identidad N° <strong>28.769.984-0</strong>, cuenta con las siguientes certificaciones:
+                </p>
+
+                <!-- Tarjetas Didácticas de Competencias Habilitadas -->
+                <div class="cargos-container">
                     
-                    <div class="cert-box-content">
-                        <h3><i class="fa-solid fa-utensils"></i> Manipulador de Alimentos</h3>
-                        <p>Habilitada bajo las normas técnicas correspondientes de higiene y seguridad agroalimentaria, garantizando las buenas prácticas profesionales para asegurar la inocuidad de los alimentos y cuidar la salud colectiva.</p>
-                        <div class="cert-validity">
-                            <i class="fa-regular fa-calendar-check"></i> Válido hasta: 31 de mayo de 2030
+                    <!-- Cargo 1: Auxiliar de Aseo -->
+                    <div class="cargo-card">
+                        <div class="cargo-top-row">
+                            <div class="cargo-icon">
+                                <i class="fa-solid fa-broom"></i>
+                            </div>
+                            <div class="cargo-info">
+                                <h3>Auxiliar de Aseo</h3>
+                                <p><i class="fa-solid fa-circle-check"></i> Calificado / Aprobado</p>
+                            </div>
                         </div>
+                        <div class="cargo-descripcion">
+                            Habilitada bajo las normas técnicas correspondientes de higiene y seguridad agroalimentaria, garantizando las buenas prácticas profesionales para asegurar la inocuidad de los alimentos y cuidar la salud colectiva.
+                        </div>
+                        <div class="cargo-vigencia-roja">
+                            <i class="fa-solid fa-calendar-dot"></i> Período de Vigencia Legal hasta el: 31 de Mayo de 2030
+                        </div>
+                    </div>
+
+                    <!-- Cargo 2: Manipulación de Alimentos -->
+                    <div class="cargo-card alimentos">
+                        <div class="cargo-top-row">
+                            <div class="cargo-icon">
+                                <i class="fa-solid fa-utensils"></i>
+                            </div>
+                            <div class="cargo-info">
+                                <h3>Manipulación de Alimentos</h3>
+                                <p><i class="fa-solid fa-circle-check"></i> Calificado / Aprobado</p>
+                            </div>
+                        </div>
+                        <div class="cargo-descripcion">
+                            Certificación de competencias clave en la gestión operativa de entornos limpios, aplicación de protocolos de sanitización institucional y manejo seguro de herramientas de mantenimiento ambiental.
+                        </div>
+                        <div class="cargo-vigencia-roja">
+                            <i class="fa-solid fa-calendar-dot"></i> Período de Vigencia Legal hasta el: 31 de Mayo de 2030
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Pie de Certificado -->
+            <footer class="cert-footer">
+                <div class="footer-sello">
+                    <i class="fa-solid fa-award"></i>
+                    <div>
+                        <p><strong>INNOVACAP CHILE</strong></p>
+                        <p>Organismo Técnico de Capacitación</p>
                     </div>
                 </div>
 
-                <!-- Certificado 2: Auxiliar de Aseo -->
-                <div class="cert-box">
-                    <!-- Imagen de fondo real (image_fd70ff.png) -->
-                    <img class="cert-box-image-watermark" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj0WvXBHVmQPoJO64ZQJwoPTqaFlCIUCfeUA&s" alt="Fondo Auxiliar de Aseo">
-                    
-                    <div class="cert-box-content">
-                        <h3><i class="fa-solid fa-broom"></i> Auxiliar de Aseo</h3>
-                        <p>Capacitada conforme a estándares avanzados en procedimientos de desinfección, higienización industrial y manejo seguro de insumos de protección química y personal en entornos de alta demanda operativa.</p>
-                        <div class="cert-validity">
-                            <i class="fa-regular fa-calendar-check"></i> Válido hasta: 31 de mayo de 2030
-                        </div>
-                    </div>
+                <!-- Bloque de Firma por encima de la línea -->
+                <div class="footer-firma">
+                    <img class="img-firma" src="https://img.freepik.com/vector-premium/firma-manual-documentos-sobre-fondo-blanco-ilustracion-vectorial-letras-caligrafia-dibujadas-mano_81863-11806.jpg" alt="Firma Caligráfica">
+                    <div class="linea-firma"></div>
+                    <p>Detalle Persona Jurídica. Receptor.RUT, 76592190-2</p>
+                    <span>Firma Electrónica Avanzada</span>
                 </div>
-
-            </section>
-        </div>
-
-        <!-- 4. Pie de Seguridad Oficial con Sellos de Agua al Final -->
-        <div class="validation-footer">
-            
-            <!-- Capa de sellos de agua decorativos de fondo -->
-            <div class="footer-watermarks">
-                <i class="fa-solid fa-award"></i>
-                <i class="fa-solid fa-signature"></i>
-            </div>
-            
-            <!-- Contenidos sobrepuestos -->
-            <!-- Sello Oficial -->
-            <div class="seal-column footer-content-node">
-                <div class="official-seal">
-                    <span class="seal-text-top">Capacitado y Certificado</span>
-                    <span class="seal-star">★</span>
-                    <span class="seal-text-bottom">Innovacap • Santiago</span>
-                </div>
-            </div>
-
-            <!-- Firma Académica -->
-          <div class="signature-column footer-content-node">
-    <!-- Cambiamos el texto por la etiqueta de imagen -->
-    <div class="handwritten-signature">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_2li1UOVPMQ_ISjpvjJtlrs1w_MagjUTfFQoid_hbIg&s=10" alt="Firma de M. Benavides R." style="max-height: 94px; width: auto;">
-    </div>
-    <div class="sig-line"></div>
-    <span class="sig-title">Dirección Académica</span><br>
-    <span class="sig-sub">Centro de Capacitación Innovacap</span>
-</div>
-            <!-- Metadatos de Autenticación -->
-            <div class="meta-column footer-content-node">
-                <div class="institution-tag">Santiago de Chile</div>
-                <div class="meta-text">
-                    ID Registro: <strong>REG-28769984-0</strong><br>
-                    Sello Digital: <strong>INNOVACAP_CAPACITACIONES_2026</strong><br>
-                    Sede Central Metropolitana y CALAMA
-                </div>
-            </div>
+            </footer>
 
         </div>
-
     </div>
+
+    <!-- Lógica Interactiva Privada -->
+    <script>
+        function validarRut() {
+            const input = document.getElementById('rutInput').value.trim();
+            const certificado = document.getElementById('certificado');
+            const errorBox = document.getElementById('errorBox');
+
+            // Limpiamos los puntos y guiones para evitar errores al escribir
+            const rutLimpio = input.replace(/\./g, '').replace(/-/g, '');
+
+            if (rutLimpio === '287699840') {
+                errorBox.style.display = 'none';
+                certificado.style.display = 'block';
+                certificado.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                certificado.style.display = 'none';
+                errorBox.style.display = 'block';
+            }
+        }
+    </script>
 
 </body>
 </html>
