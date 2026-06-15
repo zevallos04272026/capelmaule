@@ -137,13 +137,29 @@
             width: 100%;
             max-width: 850px;
             border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             padding: 50px;
             position: relative;
             border: 2px solid #E2E8F0;
-            background-image: radial-gradient(rgba(30, 64, 175, 0.02) 1px, transparent 0);
-            background-size: 24px 24px;
+            overflow: hidden;
             animation: fadeInUp 0.5s ease forwards;
+        }
+
+        /* AJUSTE: Imagen de fondo exactamente como es (sin marca de agua / opacidad 1) */
+        .certificate-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://media.istockphoto.com/id/1496524193/es/vector/fondo-de-l%C3%ADnea-concentrado-explotando-en-un-hermoso-cielo-de-color-claro-_-azul-claro.jpg?s=612x612&w=0&k=20&c=p1CaFXpljyG4HqnQyA35Aokac2S0bLZRXABUhXvw_GU=");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 1; /* Eliminada la marca de agua, queda original */
+            z-index: 1;
+            pointer-events: none;
         }
 
         @keyframes fadeInUp {
@@ -151,11 +167,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Marco de Doble Línea Elegante */
+        /* Marco de Doble Línea con fondo ligeramente blanqueado para mantener la lectura limpia */
         .certificate-border-inner {
             border: 4px double #CBD5E1;
             padding: 30px;
             position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.75); /* Capa protectora para leer bien */
+            backdrop-filter: blur(4px);
+            border-radius: 6px;
         }
 
         /* Sello de verificación flotante */
@@ -175,6 +195,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            z-index: 10;
         }
 
         /* Encabezado del Certificado */
@@ -182,12 +203,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #F1F5F9;
+            border-bottom: 2px solid rgba(226, 232, 240, 0.8);
             padding-bottom: 20px;
             margin-bottom: 35px;
         }
 
-        /* Contenedor horizontal para los dos logos de arriba */
         .logo-group {
             display: flex;
             align-items: center;
@@ -200,7 +220,7 @@
         }
 
         .cert-logo-sence {
-            max-height: 52px; /* Tamaño adaptado para equilibrar con el logo de Innovacap */
+            max-height: 52px;
             object-fit: contain;
         }
 
@@ -210,13 +230,14 @@
 
         .cert-meta-header p {
             font-size: 0.75rem;
-            color: #64748B;
-            font-weight: 500;
+            color: var(--azul-institucional);
+            font-weight: 600;
             line-height: 1.4;
         }
 
         .cert-meta-header strong {
             color: var(--azul-innovacap);
+            font-weight: 700;
         }
 
         /* Cuerpo del Certificado */
@@ -236,18 +257,18 @@
         .cert-body .constancia-texto {
             font-size: 1.05rem;
             line-height: 1.8;
-            color: #475569;
+            color: var(--azul-institucional);
             max-width: 700px;
             margin: 0 auto 30px;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .cert-body .constancia-texto strong {
-            color: var(--azul-institucional);
-            font-weight: 700;
+            color: #000000;
+            font-weight: 800;
         }
 
-        /* Grilla Didáctica de Cargos Habilitados */
+        /* Grilla de Competencias */
         .cargos-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -257,7 +278,7 @@
         }
 
         .cargo-card {
-            background: #F8FAFC;
+            background: rgba(255, 255, 255, 0.92); /* Más sólido para que resalte sobre el fondo brillante */
             border-left: 5px solid var(--azul-innovacap);
             padding: 20px;
             border-radius: 8px;
@@ -266,7 +287,7 @@
             align-items: flex-start;
             gap: 12px;
             text-align: left;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .cargo-card.alimentos {
@@ -317,27 +338,47 @@
         .cargo-descripcion {
             font-size: 0.8rem;
             line-height: 1.5;
-            color: #475569;
-            font-weight: 500;
+            color: #334155;
+            font-weight: 600;
             margin-top: 4px;
         }
 
-        .cargo-vigencia-roja {
-            font-size: 0.75rem;
-            color: var(--rojo-vigencia);
-            font-weight: 700;
-            margin-top: auto; 
-            padding-top: 10px;
-            border-top: 1px dashed #E2E8F0;
+        /* Bloque de Vigencia Legal Resaltada */
+        .cargo-vigencia-block {
             width: 100%;
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px dashed #CBD5E1;
             display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .vigencia-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #475569;
+            font-weight: 700;
+        }
+
+        .vigencia-fecha-badge {
+            background-color: var(--rojo-vigencia);
+            color: var(--blanco);
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 6px;
+            display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            box-shadow: 0 3px 8px rgba(220, 38, 38, 0.3);
+            align-self: flex-start;
         }
 
         /* Pie del Certificado con Sellos y Firmas */
         .cert-footer {
-            border-top: 1px solid #E2E8F0;
+            border-top: 1px solid rgba(226, 232, 240, 0.8);
             padding-top: 30px;
             display: flex;
             justify-content: space-between;
@@ -349,14 +390,38 @@
             align-items: center;
             gap: 12px;
             font-size: 0.75rem;
-            color: #64748B;
-            font-weight: 500;
+            color: var(--azul-institucional);
+            font-weight: 600;
+            position: relative;
+            min-width: 260px;
+            min-height: 110px;
         }
 
         .footer-sello i {
             font-size: 2.2rem;
             color: var(--azul-innovacap);
-            opacity: 0.8;
+            position: relative;
+            z-index: 4;
+        }
+
+        .footer-sello div {
+            position: relative;
+            z-index: 4;
+        }
+
+        /* Marca de agua interna del Sello de Aprobado */
+        .img-sello-dorado {
+            position: absolute;
+            left: 45%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            max-height: 220px;
+            width: auto;
+            object-fit: contain;
+            z-index: 3;
+            mix-blend-mode: multiply;
+            opacity: 0.25;
+            pointer-events: none;
         }
 
         /* Contenedor de firma */
@@ -377,7 +442,7 @@
             max-height: 115px; 
             width: auto;
             object-fit: contain;
-            z-index: 3; 
+            z-index: 4; 
             mix-blend-mode: multiply; 
             opacity: 0.95; 
             pointer-events: none;
@@ -388,7 +453,7 @@
             margin-bottom: 8px;
             width: 100%;
             position: relative;
-            z-index: 2; 
+            z-index: 3; 
         }
 
         .footer-firma p {
@@ -396,18 +461,18 @@
             font-weight: 700;
             color: var(--azul-institucional);
             position: relative;
-            z-index: 4; 
-            background-color: rgba(255, 255, 255, 0.9); 
+            z-index: 5; 
+            background-color: rgba(255, 255, 255, 0.95); 
             padding: 2px 6px;
             border-radius: 4px;
         }
 
         .footer-firma span {
             font-size: 0.65rem;
-            color: #64748B;
+            color: #475569;
             display: block;
             position: relative;
-            z-index: 4;
+            z-index: 5;
         }
 
         /* Alertas de error en búsqueda */
@@ -431,7 +496,7 @@
             .cert-header { flex-direction: column; gap: 20px; text-align: center; }
             .logo-group { justify-content: center; }
             .cert-meta-header { text-align: center; }
-            .cert-footer { flex-direction: column; gap: 25px; text-align: center; }
+            .cert-footer { flex-direction: column; gap: 35px; text-align: center; }
             .footer-sello { justify-content: center; }
         }
     </style>
@@ -459,7 +524,7 @@
     </div>
 
 
-    <!-- BLOQUE 2: VISTA DEL CERTIFICADO -->
+    <!-- BLOQUE 2: VISTA DEL CERTIFICADO (Con imagen original al 100% de fondo) -->
     <div class="certificate-container" id="certificado">
         <div class="certificate-border-inner">
             
@@ -506,8 +571,11 @@
                         <div class="cargo-descripcion">
                             Habilitada bajo las normas técnicas correspondientes de higiene y seguridad agroalimentaria, garantizando las buenas prácticas profesionales para asegurar la inocuidad de los alimentos y cuidar la salud colectiva.
                         </div>
-                        <div class="cargo-vigencia-roja">
-                            <i class="fa-solid fa-calendar-dot"></i> Período de Vigencia Legal hasta el: 31 de Mayo de 2030
+                        <div class="cargo-vigencia-block">
+                            <span class="vigencia-label">Período de Vigencia Legal</span>
+                            <div class="vigencia-fecha-badge">
+                                <i class="fa-solid fa-hourglass-half"></i> 31 de Mayo de 2030
+                            </div>
                         </div>
                     </div>
 
@@ -525,8 +593,11 @@
                         <div class="cargo-descripcion">
                             Certificación de competencias clave en la gestión operativa de entornos limpios, aplicación de protocolos de sanitización institucional y manejo seguro de herramientas de mantenimiento ambiental.
                         </div>
-                        <div class="cargo-vigencia-roja">
-                            <i class="fa-solid fa-calendar-dot"></i> Período de Vigencia Legal hasta el: 31 de Mayo de 2030
+                        <div class="cargo-vigencia-block">
+                            <span class="vigencia-label">Período de Vigencia Legal</span>
+                            <div class="vigencia-fecha-badge">
+                                <i class="fa-solid fa-hourglass-half"></i> 31 de Mayo de 2030
+                            </div>
                         </div>
                     </div>
 
@@ -535,7 +606,11 @@
 
             <!-- Pie de Certificado -->
             <footer class="cert-footer">
+                
+                <!-- Sección Izquierda: Organismo Técnico con la Marca de Agua de Fondo -->
                 <div class="footer-sello">
+                    <img class="img-sello-dorado" src="https://thumbs.dreamstime.com/b/sello-aprobado-vector-aislado-en-blanco-29840749.jpg?w=768" alt="Sello Aprobado Marca de Agua">
+                    
                     <i class="fa-solid fa-award"></i>
                     <div>
                         <p><strong>INNOVACAP CHILE</strong></p>
@@ -562,7 +637,6 @@
             const certificado = document.getElementById('certificado');
             const errorBox = document.getElementById('errorBox');
 
-            // Limpiamos los puntos y guiones para evitar errores al escribir
             const rutLimpio = input.replace(/\./g, '').replace(/-/g, '');
 
             if (rutLimpio === '287699840') {
